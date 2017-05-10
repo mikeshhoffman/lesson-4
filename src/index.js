@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom'
 import {
   BrowserRouter as Router,
   Route,
-  hashHistory
+  hashHistory,
+  Switch
 } from 'react-router-dom'
 
 import pastries from './database/pastries'
@@ -21,26 +22,34 @@ class Root extends React.Component {
     }
   }
 
+  addToOrder (e) {
+    e.preventDefault()
+    console.log('added to order!')
+  }
+
   render () {
     return (
       <Router history={hashHistory}>
         <App>
-          <Route exact path='/' render={props => (
-            <PastryList pastries={this.state.pastries} />
-          )} />
-          <Route path='/:pastry' render={props => {
-            const pastryName = props.match.params.pastry
-            const pastry = this.state.pastries.find(p => p.name === pastryName)
-            if (pastry) {
-              return (
-                <PastryPage pastry={pastry} />
-              )
-            } else {
-              return (
-                <Route path='*' status={404} component={NotFound} />
-              )
-            }
-          }} />
+          <Switch>
+            <Route exact path='/' render={props => (
+              <PastryList pastries={this.state.pastries} />
+            )} />
+            <Route path='/:pastry' render={props => {
+              const pastryName = props.match.params.pastry
+              const pastries = Object.keys(this.state.pastries).map(key => this.state.pastries[key])
+              const pastry = pastries.find(p => p.name === pastryName)
+              if (pastry) {
+                return (
+                  <PastryPage pastry={pastry} addToOrder={this.addToOrder} />
+                )
+              } else {
+                return (
+                  <Route path='*' status={404} component={NotFound} />
+                )
+              }
+            }} />
+          </Switch>
         </App>
       </Router>
     )
