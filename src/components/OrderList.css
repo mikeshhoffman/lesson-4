@@ -1,0 +1,16 @@
+.order-list {
+  text-align: center;
+  width: 400px;
+  margin: 0 auto;
+  font-size: 32px;
+}
+
+.order-list li {
+  padding: 20px 0;
+  border-bottom: 1px solid black;
+}
+
+.order-list li:last-child {
+  border-bottom: 0;
+}
+
