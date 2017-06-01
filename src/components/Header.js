@@ -9,6 +9,7 @@ const Header = (props) => {
         <span className='car-word'>Pauline's</span>
         <span className='cdr-word'>Perfect Patisserie</span>
       </h1>
+	  <a href="/orders">Order Page</a>
     </header>
   )
 }
