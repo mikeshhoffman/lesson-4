@@ -20,7 +20,13 @@ class PastryPage extends React.Component {
             <div className='price'>{formatPrice(pastry.price)}</div>
           </div>
         </div>
-        <form method='POST' action='/orders' className='add-to-order' onSubmit={this.props.addToOrder}>
+		
+        <form method='POST' action='/orders' className='add-to-order' onSubmit={(e) => {
+		e.preventDefault()
+		const input = e.target.querySelector('input')
+		const value = input.value
+		this.props.addToOrder(value)
+		}}>
           <input type='hidden' value={pastry.name} ref={(input) => { this.pastryName = input }} />
           <button type='submit'>Add to Order</button>
         </form>
@@ -28,5 +34,5 @@ class PastryPage extends React.Component {
     )
   }
 }
-
+//<form method='POST' action='/orders' className='add-to-order' onSubmit={this.props.addToOrder}>
 export default PastryPage

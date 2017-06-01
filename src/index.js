@@ -33,6 +33,7 @@ class Root extends React.Component {
 	this.addToOrder = this.addToOrder.bind(this)
   }
 
+  /*
   addToOrder (e) {
     e.preventDefault()
 	const input = e.target.querySelector('input')
@@ -51,6 +52,56 @@ class Root extends React.Component {
 	})
 	console.log('added to order!')
   }
+*/
+
+/*
+addToOrder (pastryName) {
+    const pastries = Object.keys(this.state.pastries).map(key => this.state.pastries[key])
+    const pastry = pastries.find(p => p.name === pastryName)
+    if (!pastry) return
+
+    const order = Object.assign({}, this.state.order)
+    const orderPastry = Object.assign({}, order[pastry.name])
+
+    if (orderPastry.name) {
+      orderPastry.quantity++
+      order[pastry.name] = orderPastry
+    } else {
+      order[pastry.name] = Object.assign({}, pastry, {
+        quantity: 1
+      })
+    }
+
+    this.setState({
+      order
+    })
+}
+*/
+
+addToOrder (pastryName) { 
+     const pastries = Object.keys(this.state.pastries).map(key => this.state.pastries[key]) 
+     const pastry = pastries.find(p => p.name === pastryName) 
+     if (!pastry) return 
+ 
+ 
+     const order = Object.assign({}, this.state.order) 
+     const orderPastry = Object.assign({}, order[pastry.name]) 
+ 
+ 
+     if (orderPastry.name) { 
+       orderPastry.quantity++ 
+       order[pastry.name] = orderPastry 
+     } else { 
+       order[pastry.name] = Object.assign({}, pastry, { 
+         quantity: 1 
+       }) 
+     } 
+ 
+ 
+     this.setState({ 
+       order 
+     }) 
+   } 
 
   render () {
     return (
